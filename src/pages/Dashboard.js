@@ -53,17 +53,17 @@ const Dashboard = () => {
    }
 
 
-   async function addTransection(transection){
+   async function addTransection(transection,many){
         try{
           const docRef = await addDoc(
             collection(db, `users/${user.uid}/transactions`),
             transection
           );
           fetchAllTransections();  // to get latest transaction data
-          toast.success("Transection Added!")
+          if(!many) toast.success("Transection Added!")
         }
         catch(e){
-          toast.error("could not add transection")
+          if(!many) toast.error("could not add transection")
         }
    }
 
@@ -140,7 +140,11 @@ const Dashboard = () => {
               onFinish = {onFinish}
            />
 
-           <TransectionTable transactions={transections}/>
+           <TransectionTable 
+           transactions={transections} 
+           addTransaction={addTransection}
+           fetchAllTransections = {fetchAllTransections}
+           />
         </>
       }
        

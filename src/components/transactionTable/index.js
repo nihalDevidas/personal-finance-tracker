@@ -2,8 +2,10 @@ import React,{useState} from 'react'
 import {Table, Select, Radio} from "antd"
 import searchImg from "../../assets/search.svg"
 import "./style.css"
+import {parse, unparse } from 'papaparse'
+import { toast } from 'react-toastify'
 
-const TransectionTable = ({transactions}) => {
+const TransectionTable = ({transactions, addTransaction, fetchAllTransections}) => {
 
     const[search, setSearch] = useState("");
     const[typeFilter, setTypeFilter] = useState("")
@@ -54,6 +56,51 @@ const TransectionTable = ({transactions}) => {
         }
     })
 
+
+    function exportCSV(){
+      let csv = unparse({
+        fields: ["name","tag", "date", "amount"],
+        data : transactions,
+      });
+      var data = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+      var url = window.URL.createObjectURL(data);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = "transactions.csv"
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      
+    }
+
+    function importFromCSV(event){
+      event.preventDefault();
+      try{
+        parse(event.target.files[0],{
+          header : true,
+          complete : async function (results){
+
+            for(const transaction of results.data){
+              const newTransaction = {
+                ...transaction,
+                amount: parseFloat(transaction.amount)
+              };
+              await addTransaction(newTransaction, true)
+            }
+          },
+        })
+        toast.success("All traansactions added")
+        fetchAllTransections();
+
+      }
+      catch(e){
+            toast.error("could not add transactions")
+      }
+
+    }
+
+
+    
   return( 
   <>
      <div className='input-select-wrapper'>
@@ -85,7 +132,7 @@ const TransectionTable = ({transactions}) => {
         
             <div className='radio-export-wrapper'>
 
-                <h2>Transections.</h2>
+                <h2>Transactions.</h2>
 
                 <Radio.Group
                   className='input-radio'
@@ -98,7 +145,7 @@ const TransectionTable = ({transactions}) => {
                 </Radio.Group>
 
                 <div className='export-wrapper'>
-                    <button className='btn'>Export To CSV</button>
+                    <button className='btn' onClick = {exportCSV}>Export To CSV</button>
                     
                     <div>
                       <label for="file-csv" className='btn btn-blue'>
@@ -110,6 +157,7 @@ const TransectionTable = ({transactions}) => {
                         accept=".csv"
                         required
                         style={{display:"none"}}
+                        onChange = {importFromCSV}
                       />
                     </div>
                 </div>

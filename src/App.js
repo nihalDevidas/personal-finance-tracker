@@ -10,7 +10,7 @@ function App() {
   return (
     <>
     <ToastContainer/>
-      <BrowserRouter>
+      <BrowserRouter basename='/personal-finance-tracker'>
         <Routes>
           <Route path="/" element = {<SineUp/>}/>
           <Route path="/dashboard" element = {<Dashboard/>}/>

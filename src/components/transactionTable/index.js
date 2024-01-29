@@ -145,10 +145,10 @@ const TransectionTable = ({transactions, addTransaction, fetchAllTransections}) 
                 </Radio.Group>
 
                 <div className='export-wrapper'>
-                    <button className='btn' onClick = {exportCSV}>Export To CSV</button>
+                    <button className='btn1 btn' onClick = {exportCSV}>Export To CSV</button>
                     
                     <div>
-                      <label for="file-csv" className='btn btn-blue'>
+                      <label for="file-csv" className='btn1 btn btn-blue'>
                         Import from CSV
                       </label>
                       <input

@@ -3,6 +3,7 @@ import Header from '../components/header/Header'
 import Cards from "../components/cards/index"
 import AddExpenseModal from "../components/modals/AddExpenseModal"
 import AddIncomeModal from "../components/modals/AddIncomeModal"
+import TransectionTable from "../components/transactionTable/index"
 import {addDoc, collection, getDocs,query} from "firebase/firestore"
 import {auth, db } from '../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -19,7 +20,7 @@ const Dashboard = () => {
 
    const[income, setIncome] = useState(0);
    const[expense, setExpense] = useState(0);
-   const[totalBalance, setTotalBalance] = useState(0);
+   const[totalBalance, setTotalBalance] = useState(0);  
 
 
    function showExpenseModal(){
@@ -42,7 +43,7 @@ const Dashboard = () => {
    function onFinish(values, type){
          const newtransection = {
           type:type,
-          date: moment(values.date).format("YYYY-MM-DD"),
+          date: values.date.format("YYYY-MM-DD"),
           amount:parseFloat(values.amount),
           tag:values.tag,
           name: values.name,
@@ -58,6 +59,7 @@ const Dashboard = () => {
             collection(db, `users/${user.uid}/transactions`),
             transection
           );
+          fetchAllTransections();  // to get latest transaction data
           toast.success("Transection Added!")
         }
         catch(e){
@@ -68,7 +70,7 @@ const Dashboard = () => {
 
    useEffect(()=>{
        fetchAllTransections()
-   },[])
+   },[user])
 
    
    async function fetchAllTransections(){
@@ -83,7 +85,7 @@ const Dashboard = () => {
         })
         setTransections(transectionArray)
         console.log(transectionArray)
-        toast.success("Tracsactions Fetched")
+        toast.success("Transactions Fetched")
       }
      setLoading(false)
    }
@@ -126,17 +128,19 @@ const Dashboard = () => {
             showExpenseModal={showExpenseModal}
             showIncomeModal = {showIncomeModal}
           />
-          <AddExpenseModal
+           <AddExpenseModal
               isExpenseModalVisible={isExpenseModalVisible}
               handleExpenseCancel={handleExpenseCancel}
               onFinish = {onFinish}
-          />
+           />
 
             <AddIncomeModal
               isIncomeModalVisible={isIncomeModalVisible}
               handleIncomeCancel={handleIncomeCancel}
               onFinish = {onFinish}
-          />
+           />
+
+           <TransectionTable transactions={transections}/>
         </>
       }
        

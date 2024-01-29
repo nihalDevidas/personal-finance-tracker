@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SineUp from "./pages/SineUp";
 import Dashboard from "./pages/Dashboard"
 import "./App.css"
@@ -10,14 +10,16 @@ function App() {
   return (
     <>
     <ToastContainer/>
-      <BrowserRouter basename='/personal-finance-tracker'>
+      <Router basename = "/personal-finance-tracker">
         <Routes>
           <Route path="/" element = {<SineUp/>}/>
           <Route path="/dashboard" element = {<Dashboard/>}/>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </>
   );
 }
 
 export default App;
+
+//basename = "/personal-finance-tracker"

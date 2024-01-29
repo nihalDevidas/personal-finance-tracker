@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/personal-finance-tracker/static/css/main.926124d3.css",
+    "main.js": "/personal-finance-tracker/static/js/main.2b6d000d.js",
+    "index.html": "/personal-finance-tracker/index.html",
+    "main.926124d3.css.map": "/personal-finance-tracker/static/css/main.926124d3.css.map",
+    "main.2b6d000d.js.map": "/personal-finance-tracker/static/js/main.2b6d000d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.926124d3.css",
+    "static/js/main.2b6d000d.js"
+  ]
+}

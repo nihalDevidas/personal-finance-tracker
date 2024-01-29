@@ -1,0 +1,32 @@
+.login-wrapper{
+    width:60%;
+    max-width: 420px;
+    height:auto;
+    box-shadow: var(--shadow);
+    border-radius: 1rem;
+    padding:1rem 1.5rem;
+}
+
+.title{
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    margin-top: 1.2rem;
+}
+.sub-logo{
+    color:var(--theme);
+}
+
+.orText{
+    text-align: center;
+    margin:0px;
+    font-size:1.1rem;
+
+}
+.login-text-link{
+    text-align: center;
+    margin:0px;
+    font-size:0.9rem;
+    cursor: pointer;
+}

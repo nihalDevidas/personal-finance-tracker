@@ -137,14 +137,14 @@ const Dashboard = () => {
              <h2 style={{flex:"1",textAlign:"center"}}>Expense</h2>
           </div>
 
-          <div style={{width :"95%",height:"330px", display:"flex",marginBottom:"25px", marginInline:"auto", boxShadow:"var(--shadow)",borderRadius:"8px"}}>
+          <div className='charts-wrapper' style={{width :"95%",height:"330px", display:"flex",marginBottom:"25px", marginInline:"auto", boxShadow:"var(--shadow)",borderRadius:"8px"}}>
 
-              <div style={{flex:"1",height:"inherit", borderRight:"0.5px solid lightgray"}}>
-                  {transections?<ColumnChart transactions={transections}/>:<h1>No transactions</h1>}
+              <div style={{flex:"1",height:"inherit", borderRight:"0.5px solid lightgray",display:"flex",justifyContent:"center",alignItems:"center"}}>
+                  {transections && transections.length >0?<ColumnChart transactions={transections}/>:<h2>No transaction data</h2>}
               </div>
 
               <div style={{flex:"1",height:"inherit",display:"flex",justifyContent:"center",alignItems:"center"}}>
-                  {transections?<Pie transactions={transections}/>:<h1>No transactions</h1>}
+                  {transections&& transections.length >0?<Pie transactions={transections}/>:<h2>No transaction data</h2>}
               </div>
           </div>
             

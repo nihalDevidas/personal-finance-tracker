@@ -6,3 +6,9 @@
   width: 100vw;
   height: 90vh;
 }
+
+/* css for pie chart and column chart */
+canvas{
+  height:inherit !important;
+  width: inherit !important;
+}

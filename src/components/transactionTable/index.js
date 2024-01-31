@@ -148,7 +148,7 @@ const TransectionTable = ({transactions, addTransaction, fetchAllTransections}) 
                     <button className='btn1 btn' onClick = {exportCSV}>Export To CSV</button>
                     
                     <div>
-                      <label for="file-csv" className='btn1 btn btn-blue'>
+                      <label htmlFor="file-csv" className='btn1 btn btn-blue'>
                         Import from CSV
                       </label>
                       <input

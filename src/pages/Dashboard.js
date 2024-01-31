@@ -9,6 +9,8 @@ import {auth, db } from '../firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import {toast} from "react-toastify"
 import moment from "moment"
+import ColumnChart from "../components/charts/index"
+import Pie from "../components/charts/Pie"
 
 const Dashboard = () => {
 
@@ -128,6 +130,26 @@ const Dashboard = () => {
             showExpenseModal={showExpenseModal}
             showIncomeModal = {showIncomeModal}
           />
+
+
+          <div style={{display:"flex",width:"95%",marginInline:"auto", marginTop:"1rem"}}>
+             <h2 style={{flex:"1",textAlign:"center"}}>Income</h2>
+             <h2 style={{flex:"1",textAlign:"center"}}>Expense</h2>
+          </div>
+
+          <div style={{width :"95%",height:"330px", display:"flex",marginBottom:"25px", marginInline:"auto", boxShadow:"var(--shadow)",borderRadius:"8px"}}>
+
+              <div style={{flex:"1",height:"inherit", borderRight:"0.5px solid lightgray"}}>
+                  {transections?<ColumnChart transactions={transections}/>:<h1>No transactions</h1>}
+              </div>
+
+              <div style={{flex:"1",height:"inherit",display:"flex",justifyContent:"center",alignItems:"center"}}>
+                  {transections?<Pie transactions={transections}/>:<h1>No transactions</h1>}
+              </div>
+          </div>
+            
+
+
            <AddExpenseModal
               isExpenseModalVisible={isExpenseModalVisible}
               handleExpenseCancel={handleExpenseCancel}
@@ -145,6 +167,7 @@ const Dashboard = () => {
            addTransaction={addTransection}
            fetchAllTransections = {fetchAllTransections}
            />
+           
         </>
       }
        

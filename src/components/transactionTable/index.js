@@ -25,8 +25,8 @@ const TransectionTable = ({transactions, addTransaction, fetchAllTransections}) 
         },
         {
             title:"Tag",
-            dataIndex: "type",
-            key: "type"
+            dataIndex: "tag",
+            key: "tag"
         },
         {
             title:"Type",
